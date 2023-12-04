@@ -1,23 +1,36 @@
-import logo from './logo.svg';
 import './App.css';
+import Title from './components/Title';
+import Contents from './components/Contents';
+import Comments from './components/Comments';
+import { useState } from 'react';
 
 function App() {
+  const [title, setTitle] = useState('title');
+  const [contents, setContents] = useState('contents');
+
+  const [isEditTitle, setIsEditTitle] = useState(false);
+  const [isEditContents, setIsEditContents] = useState(false);
+
+  const toggleTitleHandler = () => {
+    setIsEditTitle(!isEditTitle);
+  };
+
+  const toggleContentsHandler = () => {
+    setIsEditContents(!isEditContents);
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <h1>NOTICE</h1>
+      <Title
+        title={title}
+        setTitle={setTitle}
+        isEditTitle={isEditTitle}
+        toggleHandler={toggleTitleHandler}
+      />
+      <Contents content={contents} setContent={setContents} isEditContents={isEditContents}></Contents>
+      <button onClick={toggleContentsHandler}>{isEditContents ? "Save" : "Edit"}</button>
+      <Comments></Comments>
     </div>
   );
 }
